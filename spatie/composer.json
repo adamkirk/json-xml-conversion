@@ -1,0 +1,14 @@
+{
+    "name": "adamkirk/assessments",
+    "description": "Assessing all the things",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Adam Kirk",
+            "email": "adam@vonq.com"
+        }
+    ],
+    "require": {
+        "spatie/array-to-xml": "^2.7"
+    }
+}
