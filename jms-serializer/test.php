@@ -2,6 +2,11 @@
 
 require "./vendor/autoload.php";
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use \JMS\Serializer\Annotation\XmlKeyValuePairs;
+
+AnnotationRegistry::registerFile(__DIR__ . "/vendor/jms/serializer/src/JMS/Serializer/Annotation/XmlKeyValuePairs.php");
+
 
 $json = '{
   "data": [{
@@ -32,9 +37,28 @@ $json = '{
   ]
 }';
 
+class TestData {
+    /**
+     * @var array
+     * @XmlKeyValuePairs
+     */
+    private $data = [];
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+}
+
 $data = json_decode($json, true);
+
+
+$dto = new TestData($data);
 
 $serializer = JMS\Serializer\SerializerBuilder::create()->build();
 
+
+
 var_dump($data);
-var_dump($serializer->serialize($data, 'xml'));
+var_dump($serializer->serialize($dto, 'xml'));
